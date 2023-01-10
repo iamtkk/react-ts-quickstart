@@ -9,21 +9,6 @@ export default class Chatting extends Component<{}, State> {
   chatRef = React.createRef<HTMLDivElement>();
   state: State = { msgList: [], msg: '' };
 
-  getSnapshotBeforeUpdate(prevProps: {}, prevState: State): number {
-    const chat = this.chatRef.current;
-    if (prevState.msgList !== this.state.msgList && chat !== null) {
-      return chat.offsetHeight;
-    }
-    return 0;
-  }
-
-  componentDidUpdate(prevProps: {}, prevState: State, snapshot: number) {
-    const chat = this.chatRef.current;
-    if (snapshot > 0 && chat !== null) {
-      chat.scrollTop = chat.scrollHeight - snapshot;
-    }
-  }
-
   setMsg = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState({ ...this.state, msg: e.target.value });
   };

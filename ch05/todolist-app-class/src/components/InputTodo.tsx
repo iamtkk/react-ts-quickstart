@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 type Props = {
   addTodo: Function;
@@ -10,16 +10,16 @@ type State = {
 
 export default class InputTodo extends Component<Props, State> {
   state = {
-    todo: "",
+    todo: '',
   };
 
   addHandler = () => {
     this.props.addTodo(this.state.todo);
-    this.setState({ todo: "" });
+    this.setState({ todo: '' });
   };
 
   enterInput = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       this.addHandler();
     }
   };
@@ -29,6 +29,7 @@ export default class InputTodo extends Component<Props, State> {
   };
 
   render() {
+    console.log('## InputTodo 렌더');
     return (
       <div className="row">
         <div className="col">
@@ -43,7 +44,10 @@ export default class InputTodo extends Component<Props, State> {
               onChange={this.changeTodo}
               onKeyUp={this.enterInput}
             />
-            <span className="btn btn-primary input-group-addon" onClick={this.addHandler}>
+            <span
+              className="btn btn-primary input-group-addon"
+              onClick={this.addHandler}
+            >
               추가
             </span>
           </div>
