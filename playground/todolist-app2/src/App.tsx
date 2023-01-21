@@ -13,6 +13,13 @@ const App = () => {
     setTodo('');
   };
 
+  const deleteTodp = (id: number) => {
+    let newTodoList = [...todoList];
+    const index = todoList.findIndex((item) => item.id === id);
+    newTodoList.splice(index, 1);
+    setTodo(newTodoList);
+  };
+
   return (
     <div className="boxStyle">
       <input
