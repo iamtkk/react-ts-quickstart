@@ -1,34 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+import Header from './components/Header';
+import Home from './pages/Home';
+import About from './pages/About';
+import SongList from './pages/SongList';
+import Members from './pages/Members';
 
+export type MemberType = { name: string; photo: string };
+
+const App = () => {
+  const [members] = useState<Array<MemberType>>([
+    { name: 'Maggie Adams', photo: 'photos/Mag.png' },
+    { name: 'Sammie Purecell', photo: 'photos/Sam.png' },
+    { name: 'Tim Purecell', photo: 'photos/Tim.png' },
+    { name: 'Scott King', photo: 'photos/King.png' },
+    { name: 'Johnny Pike', photo: 'photos/JPike.jpg' },
+    { name: 'Toby Ruckert', photo: 'photos/Toby.jpg' },
+  ]);
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="container">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About title={'여우와 늙다리들'} />} />
+          <Route path="/members" element={<Members members={members} />} />
+          <Route path="/songs" element={<SongList />} />
+        </Routes>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
