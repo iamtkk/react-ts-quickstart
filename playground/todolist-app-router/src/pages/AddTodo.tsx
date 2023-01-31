@@ -1,22 +1,23 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { CallbacksType } from "../AppContainer";
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import { CallbacksType } from '../AppContainer';
 
 type PropsType = { callbacks: CallbacksType };
 
 const AddTodo = ({ callbacks }: PropsType) => {
   const navigate = useNavigate();
 
-  let [todo, setTodo] = useState<string>("");
-  let [desc, setDesc] = useState<string>("");
+  let [todo, setTodo] = useState<string>('');
+  let [desc, setDesc] = useState<string>('');
 
   const addTodoHandler = () => {
-    if (todo.trim() === "" || desc.trim() === "") {
-      alert("반드시 할일, 설명을 입력해야 합니다.");
+    if (todo.trim() === '' || desc.trim() === '') {
+      alert('반드시 할일, 설명을 입력해야 합니다.');
       return;
     }
-    callbacks.addTodo(todo, desc);
-    navigate("/todos");
+    callbacks.addTodo(todo, desc, () => {
+      navigate('/todos');
+    });
   };
 
   return (
@@ -49,10 +50,18 @@ const AddTodo = ({ callbacks }: PropsType) => {
             ></textarea>
           </div>
           <div className="form-group">
-            <button type="button" className="btn btn-primary m-1" onClick={addTodoHandler}>
+            <button
+              type="button"
+              className="btn btn-primary m-1"
+              onClick={addTodoHandler}
+            >
               추 가
             </button>
-            <button type="button" className="btn btn-primary m-1" onClick={() => navigate("/todos")}>
+            <button
+              type="button"
+              className="btn btn-primary m-1"
+              onClick={() => navigate('/todos')}
+            >
               취 소
             </button>
           </div>
